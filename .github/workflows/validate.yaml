@@ -1,0 +1,25 @@
+name: Build Docker images
+
+on: [pull_request]
+
+jobs:
+
+  build-ubuntu:
+    name: Build Ubuntu image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker build
+      run: |-
+        docker build ./docker -f ./docker/Dockerfile.ubuntu --tag debug-ubuntu
+
+  build-alpine:
+    name: Build Alpine image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker build
+      run: |-
+        docker build ./docker -f ./docker/Dockerfile.alpine --tag debug-alpine
