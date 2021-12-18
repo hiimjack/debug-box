@@ -9,5 +9,6 @@ RUN apt-get update && \
         mtr \
         telnet \
         dnsutils \
+        vim \
         && \
     apt-get clean
