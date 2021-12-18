@@ -1,0 +1,92 @@
+name: Build and Deploy to Docker Hub
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  DOCKER_REPO: debug-box
+
+jobs:
+
+  extract-tag:
+    name: Print Github Repo tag
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Extract Github Tag
+        id: extract_tag
+        run: |-
+          echo "##[set-output name=tag;]$( echo ${GITHUB_REF} | sed 's|refs/tags/||g')"
+      - name: print tag
+        env:
+          TAG: ${{ steps.extract_tag.outputs.tag }}
+        run: |-
+          echo "tag:$TAG"
+    outputs:
+      tag: ${{  steps.extract_tag.outputs.tag }}
+  
+  print-tag:
+    name: Print env TAG
+    runs-on: ubuntu-latest
+    needs:
+      - extract-tag
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: print
+        env:
+          TAG: ${{ needs.extract-tag.outputs.tag }}
+        run: |-
+          echo "tag:$TAG"
+
+  
+  build-deploy-ubuntu:
+    name: Build and Deploy the Ubuntu image
+    runs-on: ubuntu-latest
+    needs:
+      - extract-tag
+    env:
+      TAG: ${{ needs.extract-tag.outputs.tag }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker login
+      run: |-
+        docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+    - name: Docker build
+      run: |-
+        docker build ./docker -f ./docker/Dockerfile.ubuntu --tag $DOCKER_USER/$DOCKER_REPO:$TAG --tag $DOCKER_USER/$DOCKER_REPO:ubuntu --tag $DOCKER_USER/$DOCKER_REPO:latest
+    - name: Docker push
+      run: |-
+        docker push --all-tags $DOCKER_USER/$DOCKER_REPO
+
+  build-deploy-alpine:
+    name: Build and Deploy the Alpine image
+    runs-on: ubuntu-latest
+    needs:
+      - extract-tag
+    env:
+      TAG: ${{ needs.extract-tag.outputs.tag }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker login
+      run: |-
+        docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+    - name: Docker build
+      run: |-
+        docker build ./docker -f ./docker/Dockerfile.alpine --tag $DOCKER_USER/$DOCKER_REPO:$TAG-alpine --tag $DOCKER_USER/$DOCKER_REPO:alpine --tag $DOCKER_USER/$DOCKER_REPO:minimal
+    - name: Docker push
+      run: |-
+        docker push --all-tags $DOCKER_USER/$DOCKER_REPO
+
+
+
+
+
