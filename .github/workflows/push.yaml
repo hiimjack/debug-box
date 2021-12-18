@@ -61,7 +61,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_TOKEN
     - name: Docker build
       run: |-
-        docker build ./docker -f ./docker/Dockerfile.ubuntu --tag $DOCKER_USER/$DOCKER_REPO:$TAG --tag $DOCKER_USER/$DOCKER_REPO:ubuntu --tag $DOCKER_USER/$DOCKER_REPO:latest
+        docker build ./docker -f ./docker/Dockerfile.ubuntu --tag $DOCKER_USER/$DOCKER_REPO:$TAG --tag $DOCKER_USER/$DOCKER_REPO:$TAG-ubuntu --tag $DOCKER_USER/$DOCKER_REPO:ubuntu --tag $DOCKER_USER/$DOCKER_REPO:latest
     - name: Docker push
       run: |-
         docker push --all-tags $DOCKER_USER/$DOCKER_REPO
