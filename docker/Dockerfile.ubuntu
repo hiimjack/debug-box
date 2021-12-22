@@ -9,6 +9,7 @@ RUN apt-get update && \
         mtr \
         telnet \
         dnsutils \
+        iputils-ping \
         vim \
         && \
     apt-get clean
