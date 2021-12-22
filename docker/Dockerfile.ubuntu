@@ -6,5 +6,10 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
         curl \
+        mtr \
+        telnet \
+        dnsutils \
+        iputils-ping \
+        vim \
         && \
     apt-get clean
