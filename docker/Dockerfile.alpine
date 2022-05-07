@@ -8,7 +8,7 @@ RUN apk update && \
         busybox-extras \
         iputils \
         vim \
-        redis-cli \
+        redis \
         postgresql-client
 
     
