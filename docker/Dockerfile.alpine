@@ -9,6 +9,7 @@ RUN apk update && \
         iputils \
         vim \
         redis \
+        mysql-client \
         postgresql-client
 
     
