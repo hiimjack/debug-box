@@ -14,6 +14,6 @@ RUN apt-get update && \
         traceroute \
         redis-tools \
         mysql-client \
-        postgresql-client-12 \
+        postgresql-client \
         && \
     apt-get clean
