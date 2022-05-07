@@ -7,6 +7,9 @@ RUN apk update && \
         mtr \
         busybox-extras \
         iputils \
-        vim 
+        vim \
+        redis \
+        mysql-client \
+        postgresql-client
 
     
