@@ -12,5 +12,8 @@ RUN apt-get update && \
         iputils-ping \
         vim \
         traceroute \
+        redis-tools \
+        mysql-client \
+        postgresql-client-12 \
         && \
     apt-get clean
