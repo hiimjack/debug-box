@@ -15,5 +15,6 @@ RUN apt-get update && \
         redis-tools \
         mysql-client \
         postgresql-client \
+        apache2-utils \
         && \
     apt-get clean
