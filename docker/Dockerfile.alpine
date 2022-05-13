@@ -10,6 +10,7 @@ RUN apk update && \
         vim \
         redis \
         mysql-client \
-        postgresql-client
+        postgresql-client \
+        apache2-utils 
 
     
