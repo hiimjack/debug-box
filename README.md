@@ -15,8 +15,8 @@ A multitool for container/network testing and troubleshooting. The main image is
 
 ### Variant image tags
 
-+ **latest**/**tag**/**tag-ubuntu**/**ubuntu** - Ubuntu based image
-+ **minimal**/**tag-alpine**/**alpine** - Alpine based image
++ **latest**/**$TAG**/**$TAG-ubuntu**/**ubuntu** - Ubuntu based image
++ **minimal**/**$TAG-alpine**/**alpine** - Alpine based image
 
 
 
