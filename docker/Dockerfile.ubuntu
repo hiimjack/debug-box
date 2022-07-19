@@ -2,6 +2,8 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+COPY curl.txt curl.txt
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
@@ -15,5 +17,9 @@ RUN apt-get update && \
         redis-tools \
         mysql-client \
         postgresql-client \
+        apache2-utils \
         && \
     apt-get clean
+
+#CMD ["/bin/bash"]
+CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
