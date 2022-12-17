@@ -18,7 +18,7 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Extract Github Tag
         id: extract_tag
         run: |-
@@ -38,7 +38,7 @@ jobs:
       - extract-tag
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: print
         env:
           TAG: ${{ needs.extract-tag.outputs.tag }}
@@ -55,7 +55,7 @@ jobs:
       TAG: ${{ needs.extract-tag.outputs.tag }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Docker login
       run: |-
         docker login -u $DOCKER_USER -p $DOCKER_TOKEN
@@ -75,7 +75,7 @@ jobs:
       TAG: ${{ needs.extract-tag.outputs.tag }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Docker login
       run: |-
         docker login -u $DOCKER_USER -p $DOCKER_TOKEN
