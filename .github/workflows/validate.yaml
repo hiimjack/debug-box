@@ -22,9 +22,7 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: false
         tags: debug-ubuntu:latest
-    #- name: Docker build
-    #  run: |-
-    #    docker build ./docker -f ./docker/Dockerfile.ubuntu --tag debug-ubuntu
+
 
   build-alpine:
     name: Build Alpine image
@@ -44,6 +42,4 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: false
         tags: debug-alpine:latest
-    #- name: Docker build
-    #  run: |-
-    #    docker build ./docker -f ./docker/Dockerfile.alpine --tag debug-alpine
+
