@@ -32,6 +32,18 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Docker build
-      run: |-
-        docker build ./docker -f ./docker/Dockerfile.alpine --tag debug-alpine
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Build
+      uses: docker/build-push-action@v5
+      with:
+        context: ./docker
+        file: ./docker/Dockerfile.alpine
+        platforms: linux/amd64,linux/arm64
+        push: false
+        tags: debug-alpine:latest
+    #- name: Docker build
+    #  run: |-
+    #    docker build ./docker -f ./docker/Dockerfile.alpine --tag debug-alpine
