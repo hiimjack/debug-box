@@ -8,6 +8,7 @@ A multitool for container/network testing and troubleshooting. The main image is
 ### Supported platforms
 
 + linux/amd64
++ linux/arm64
 
 ### Download from DockerHub
 
