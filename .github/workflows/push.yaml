@@ -66,10 +66,10 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: |
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:${{  github.ref_name }}
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:${{  github.ref_name }}-ubuntu
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:ubuntu
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:latest     
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}-ubuntu
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:ubuntu
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:latest     
     
     
     
@@ -99,9 +99,9 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: |
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:${{  github.ref_name }}-alpine
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:alpine
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:minimal
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}-alpine
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:alpine
+          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:minimal
     
     
 
