@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
       - name: print
         env:
-          TAG: ${{ needs.extract-tag.outputs.tag }}
+          TAG: ${{  github.ref_name }}
         run: |-
           echo "tag:$TAG"
 
@@ -46,8 +46,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - extract-tag
-    env:
-      TAG: ${{ needs.extract-tag.outputs.tag }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -68,8 +66,8 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: |
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:$TAG
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:$TAG-ubuntu
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:${{  github.ref_name }}
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:${{  github.ref_name }}-ubuntu
           ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:ubuntu
           ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:latest     
     
@@ -81,8 +79,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - extract-tag
-    env:
-      TAG: ${{ needs.extract-tag.outputs.tag }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -103,7 +99,7 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: |
-          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:$TAG-alpine
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:${{  github.ref_name }}-alpine
           ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:alpine
           ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:minimal
     
