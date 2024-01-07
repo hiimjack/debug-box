@@ -5,11 +5,6 @@ on:
     tags:
       - '*'
 
-env:
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USER }}
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-  DOCKER_REPO: debug-box
-
 jobs:
 
   extract-tag:
@@ -72,7 +67,11 @@ jobs:
         file: ./docker/Dockerfile.ubuntu
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: $DOCKER_USER/$DOCKER_REPO:$TAG, $DOCKER_USER/$DOCKER_REPO:$TAG-ubuntu, $DOCKER_USER/$DOCKER_REPO:ubuntu, $DOCKER_USER/$DOCKER_REPO:latest     
+        tags: |
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:$TAG
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:$TAG-ubuntu
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:ubuntu
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:latest     
     
     
     
@@ -103,7 +102,10 @@ jobs:
         file: ./docker/Dockerfile.alpine
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: $DOCKER_USER/$DOCKER_REPO:$TAG-alpine, $DOCKER_USER/$DOCKER_REPO:alpine, $DOCKER_USER/$DOCKER_REPO:minimal
+        tags: |
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:$TAG-alpine
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:alpine
+          ${{ secrets.DOCKER_USER }}/${{ env.DOCKER_REPO }}:minimal
     
     
 
