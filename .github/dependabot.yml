@@ -5,4 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-      
+    target-branch: "master"
+    labels:
+      - "dependencies"
