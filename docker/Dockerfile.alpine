@@ -1,4 +1,4 @@
-FROM alpine:3.19.0
+FROM alpine:3.20.1
 
 COPY curl.txt curl.txt
 
@@ -15,5 +15,3 @@ RUN apk update && \
         mysql-client \
         postgresql-client \
         apache2-utils 
-
-    
