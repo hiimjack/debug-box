@@ -1,0 +1,39 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  // "editor.tabSize": 2,
+  "editor.insertSpaces": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[yaml]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.tslint": "always"
+  },
+  "files.exclude": {
+    "out": true,
+    "dist": true,
+    "**/*.pyc": true,
+    ".nyc_output": true,
+    "obj": true,
+    "bin": true,
+    "**/__pycache__": true,
+    "**/node_modules": true,
+    ".vscode-test": false,
+    ".vscode test": false,
+    "**/.mypy_cache/**": true
+  },
+  "search.exclude": {
+    "out": true,
+    "dist": true,
+    "**/node_modules": true,
+    "coverage": true,
+    "languageServer*/**": true,
+    ".vscode-test": true,
+    ".vscode test": true
+  }
+}
