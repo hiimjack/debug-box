@@ -3,14 +3,13 @@ name: Build and Deploy to Docker Hub
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
-
   extract-tag:
     name: Print Github Repo tag
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,7 +24,7 @@ jobs:
           echo "tag:$TAG"
     outputs:
       tag: ${{  steps.extract_tag.outputs.tag }}
-  
+
   print-tag:
     name: Print env TAG
     runs-on: ubuntu-latest
@@ -40,39 +39,35 @@ jobs:
         run: |-
           echo "tag:$TAG"
 
-  
   build-deploy-ubuntu:
     name: Build and Deploy the Ubuntu image
     runs-on: ubuntu-latest
     needs:
       - extract-tag
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: ./docker
-        file: ./docker/Dockerfile.ubuntu
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: |
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}-ubuntu
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:ubuntu
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:latest     
-    
-    
-    
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker
+          file: ./docker/Dockerfile.ubuntu
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}-ubuntu
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:ubuntu
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:latest
 
   build-deploy-alpine:
     name: Build and Deploy the Alpine image
@@ -80,28 +75,25 @@ jobs:
     needs:
       - extract-tag
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: ./docker
-        file: ./docker/Dockerfile.alpine
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: |
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}-alpine
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:alpine
-          ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:minimal
-    
-    
-
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker
+          file: ./docker/Dockerfile.alpine
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:${{  github.ref_name }}-alpine
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:alpine
+            ${{ secrets.DOCKER_USER }}/${{ vars.DOCKER_REPO }}:minimal
